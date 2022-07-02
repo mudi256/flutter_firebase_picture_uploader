@@ -6,7 +6,7 @@ environment:
   sdk: '>=2.12.0 <3.0.0'  
 
 dependencies:
-  firebase_picture_uploader:
+  firestore_picture_uploader:
     path: ../ 
 
   flutter: 
