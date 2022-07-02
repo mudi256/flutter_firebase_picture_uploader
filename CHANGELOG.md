@@ -1,4 +1,4 @@
-## 1.3.0 - 3/July/2022
+## 1.3.2 - 3/July/2022
 * Update image_cropper package, use ImageCropper().cropImage() instead of static ImageCropper.cropImage()
 ## 1.3.0
   * Refactor: update dependencies to most recent ones
