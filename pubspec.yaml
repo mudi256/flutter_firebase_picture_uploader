@@ -16,7 +16,7 @@ dependencies:
   firebase_core: ^1.7.0
   image: ^3.0.8 
   image_picker: ^0.8.4+2
-  image_cropper: ^1.4.1
+  image_cropper: ^2.0.3
   shared_preferences: ^2.0.8
   path_provider: ^2.0.5
   cupertino_icons: ^1.0.3 

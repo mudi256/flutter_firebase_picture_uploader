@@ -449,7 +449,7 @@ class _SingleProfilePictureUploadWidgetState
     }
 
     // crop image if requested
-    File? finalImage = File(image.path);
+    CroppedFile? finalImage = CroppedFile(image.path);
     if (widget.pictureUploadWidget!.settings.imageManipulationSettings
         .enableCropping) {
       finalImage = await widget.pictureUploadController!.cropImage(
@@ -463,7 +463,7 @@ class _SingleProfilePictureUploadWidgetState
 
     // update display state
     setState(() {
-      _uploadJob.image = finalImage;
+      _uploadJob.image = File(finalImage!.path!);
       _uploadJob.uploadProcessing = true;
     });
     widget.onPictureChange(_uploadJob);
@@ -473,12 +473,12 @@ class _SingleProfilePictureUploadWidgetState
       // in case of custom upload function, use it
       if (widget.pictureUploadWidget!.settings.customUploadFunction != null) {
         _uploadJob.storageReference = await widget.pictureUploadWidget!.settings
-            .customUploadFunction!(finalImage, _uploadJob.id);
+            .customUploadFunction!(File(finalImage.path), _uploadJob.id);
       } else {
         // else use default one
         _uploadJob.storageReference = await widget.pictureUploadController!
             .uploadProfilePicture(
-                finalImage,
+               File(finalImage.path),
                 widget.pictureUploadWidget!.settings.uploadDirectory,
                 _uploadJob.id,
                 widget.pictureUploadWidget!.settings.customUploadFunction);
@@ -575,7 +575,7 @@ class _SingleProfilePictureUploadWidgetState
                     color:
                         widget.pictureUploadWidget!.buttonStyle.backgroundColor,
                     width: 0.0),
-                borderRadius: new BorderRadius.circular(widget.pictureUploadWidget.buttonStyle.radius)),
+                borderRadius: new BorderRadius.circular(widget.pictureUploadWidget!.buttonStyle.radius)),
             child: buttonContent),
         onPressed: !widget.pictureUploadWidget!.enabled ? null : _uploadImage);
   }
@@ -584,7 +584,7 @@ class _SingleProfilePictureUploadWidgetState
     final Container existingImageWidget = Container(
         padding: const EdgeInsets.fromLTRB(0, 10, 10, 0),
         child: ClipRRect(
-          borderRadius: new BorderRadius.circular(widget.pictureUploadWidget.buttonStyle.radius),
+          borderRadius: new BorderRadius.circular(widget.pictureUploadWidget!.buttonStyle.radius),
           child: _uploadJob.imageProvider != null
               ? Image(
                   image: _uploadJob.imageProvider!,
